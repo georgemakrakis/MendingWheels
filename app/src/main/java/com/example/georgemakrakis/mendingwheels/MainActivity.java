@@ -1,5 +1,6 @@
 package com.example.georgemakrakis.mendingwheels;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,8 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.VideoView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -55,14 +59,86 @@ public class MainActivity extends AppCompatActivity
         Spinner spinner = (Spinner) findViewById(R.id.accessories_spinner);
 
         List<String> accessories = new ArrayList<>();
+
+        accessories.add("Select an accessory");
         accessories.add("Chain");
-        accessories.add("Brake");
+        accessories.add("Freehub Body");
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, accessories);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+
+        // Init the video player
+        final VideoView videoview = (VideoView) findViewById(R.id.videoView);
+
+        // Make an action when the user selects an item
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                String selectedItem = parent.getItemAtPosition(position).toString(); //this is your selected item
+                if(selectedItem.equals("Select an accessory"))
+                {
+                    // Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.chain_rear_derailleur);
+                    Button playstop = (Button) findViewById(R.id.playstop);
+                    playstop.setText("Play");
+                    videoview.setVisibility(View.GONE);
+                    videoview.setVisibility(View.VISIBLE);
+                    videoview.setVideoURI(null);
+
+                }
+                else if(selectedItem.equals("Chain"))
+                {
+                    Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.chain_rear_derailleur);
+                    videoview.setVideoURI(uri);
+                }
+                else if(selectedItem.equals("Freehub Body"))
+                {
+                    Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.remove_freehub_body);
+                    videoview.setVideoURI(uri);
+                }
+            }
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+        });
+
+
+
+
+    }
+    // Play/Stop button
+    public void playVideo(View view)
+    {
+        VideoView videoview= (VideoView) findViewById(R.id.videoView);
+        Button playstop = (Button) findViewById(R.id.playstop);
+//        boolean isPlaying = false;
+//
+//        if (isPlaying) {
+//            videoview.stopPlayback();
+//            playstop.setText("Play");
+//            isPlaying = !isPlaying;
+//        }
+//        else
+//        {
+//            isPlaying = true;
+//            videoview.start();
+//            playstop.setText("Pause");
+//
+//        }
+        if(videoview.isPlaying())
+        {
+            videoview.pause();
+            playstop.setText("Play");
+        }
+        else
+        {
+            videoview.start();
+            playstop.setText("Pause");
+        }
+
 
 
     }
@@ -142,4 +218,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

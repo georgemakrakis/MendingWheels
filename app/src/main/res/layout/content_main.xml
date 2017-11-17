@@ -27,12 +27,29 @@
             android:id="@+id/accessories_spinner"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:prompt="@string/accessories_prompt"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            android:prompt="@string/accessories_prompt"
+            <VideoView
+                android:id="@+id/videoView"
+                android:layout_width="wrap_content"
+                android:layout_height="250dp"/>
+            <Button
+                android:id="@+id/playstop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Play"
+                android:onClick="playVideo"/>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
 
-            />
-
-    <!--<TextView-->
+        <!--<TextView-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:text="Hello World!"-->
