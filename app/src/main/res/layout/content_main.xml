@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bicycle_backround_b"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.georgemakrakis.mendingwheels.MainActivity"
     tools:showIn="@layout/app_bar_main">
@@ -15,6 +16,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="50dp"
+
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
