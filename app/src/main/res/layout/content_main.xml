@@ -44,7 +44,14 @@
                 android:layout_gravity="center"
                 android:text="Play"
                 android:onClick="playVideo"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Realated Stores:"
+                android:layout_marginLeft="8dp"
+                />
             <ListView
+                android:id="@+id/stores_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>

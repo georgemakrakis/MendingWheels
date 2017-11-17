@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.VideoView;
 
@@ -87,16 +88,42 @@ public class MainActivity extends AppCompatActivity
                     videoview.setVisibility(View.VISIBLE);
                     videoview.setVideoURI(null);
 
+                    List<String> stores = new ArrayList<>();
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, R.layout.listview, stores);
+
+                    //Load them into the ListView
+                    ListView listView = (ListView) findViewById(R.id.stores_list);
+                    listView.setAdapter(adapter);
+
                 }
                 else if(selectedItem.equals("Chain"))
                 {
                     Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.chain_rear_derailleur);
                     videoview.setVideoURI(uri);
+
+                    // List with stores that sell Chains
+                    List<String> stores = new ArrayList<>();
+                    stores.add("Bogiatzoglou");
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, R.layout.listview, stores);
+
+                    //Load them into the ListView
+                    ListView listView = (ListView) findViewById(R.id.stores_list);
+                    listView.setAdapter(adapter);
                 }
                 else if(selectedItem.equals("Freehub Body"))
                 {
                     Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.remove_freehub_body);
                     videoview.setVideoURI(uri);
+
+                    // List with stores that sell Chains
+                    List<String> stores = new ArrayList<>();
+                    stores.add("Bogiatzoglou");
+                    stores.add("Katsouris Bikes");
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, R.layout.listview, stores);
+
+                    //Load them into the ListView
+                    ListView listView = (ListView) findViewById(R.id.stores_list);
+                    listView.setAdapter(adapter);
                 }
             }
             public void onNothingSelected(AdapterView<?> parent)
